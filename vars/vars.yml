@@ -19,4 +19,8 @@ su_users:
     password: "{{ su_vault_vmpwd1 }}"
     is_super_user: true
     sudo_rules: []
+# Vars for andrewrothstein.anaconda
+anaconda_make_sys_default: true
+# Vars for andrewrothstein.conda-env
+conda_env_activate_for_login_shell: true
 # Additional - Hammad
