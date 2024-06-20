@@ -1,0 +1,22 @@
+---
+####
+# Ansible Playbook Variables - Common to all OS
+####
+
+# geerlinguy-roles-vars follow:
+ntp_timezone: America/Toronto
+docker_edition: 'ce'
+docker_packages:
+  - "docker-{{ docker_edition }}"
+  - "docker-{{ docker_edition }}-cli"
+  - "docker-{{ docker_edition }}-rootless-extras"
+docker_packages_state: present
+pip_install_packages:
+  - name: docker
+# Vars for Role: hammadrauf.sudousers
+su_users:
+  - username: "{{ su_vault_vmuser1 }}"
+    password: "{{ su_vault_vmpwd1 }}"
+    is_super_user: true
+    sudo_rules: []
+# Additional - Hammad

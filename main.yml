@@ -1,0 +1,67 @@
+---
+- name: Play - Ansible-Server with Molecule (docker driver)
+  hosts: all
+  vars_files:
+    - ./vars/vars.yml
+    - ./vars/secrets.yml
+  become: true
+
+  pre_tasks:
+    - debug: var=ansible_os_family
+    - name: Load OS specific Vars file
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "./vars/os_specific_{{ ansible_os_family }}.yml"
+        - "./vars/os_specific_default.yml"
+
+    - name: Install Host-System packages
+      package:
+        name:
+          - git
+          - gpg
+          - jq
+          - python3-jmespath
+        state: present
+      become: true
+
+    - name: Add Hashicorp key downloaded from URL to Hashicorp Keyring
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        keyring: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        state: present
+      become: true
+
+    - name: Add Terraform repository into sources list
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ ansible_distribution_release | lower }} main"
+        state: present
+      become: true
+
+    - name: Update the repository cache and Install Terraform on Ansible-Server
+      ansible.builtin.apt:
+        name: terraform
+        update_cache: yes
+      become: true
+
+  roles:
+    - role: geerlingguy.ntp
+    - role: geerlingguy.java
+    - role: hammadrauf.sudousers    
+    - role: geerlingguy.pip
+    - role: geerlingguy.docker
+    - role: geerlingguy.git
+    - role: geerlingguy.ansible
+    - role: andrewrothstein.anaconda
+    - role: andrewrothstein.conda-env
+      conda_env_name: ansible
+      conda_env_environment: env-ansible.yml    
+
+  tasks:
+
+    - name: "Modify user {{ su_vault_vmuser1 }} to add group 'docker'"
+      ansible.builtin.user:
+        name: "{{ su_vault_vmuser1 }}"
+        groups: docker
+        append: yes
+      become: true
+
