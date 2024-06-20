@@ -3,9 +3,7 @@ roles:
   - geerlingguy.ntp
   - geerlingguy.java
   - hammadrauf.sudousers
-  - geerlingguy.pip
   - geerlingguy.docker
   - geerlingguy.git
-  - geerlingguy.ansible
   - andrewrothstein.anaconda
   - andrewrothstein.conda-env

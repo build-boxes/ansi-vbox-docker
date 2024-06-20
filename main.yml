@@ -46,11 +46,9 @@
   roles:
     - role: geerlingguy.ntp
     - role: geerlingguy.java
-    - role: hammadrauf.sudousers    
-    - role: geerlingguy.pip
-    - role: geerlingguy.docker
+    - role: hammadrauf.sudousers
     - role: geerlingguy.git
-    - role: geerlingguy.ansible
+    - role: geerlingguy.docker    
     - role: andrewrothstein.anaconda
     - role: andrewrothstein.conda-env
       conda_env_name: ansible
