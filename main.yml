@@ -21,6 +21,7 @@
           - gpg
           - jq
           - python3-jmespath
+          - acl
         state: present
       become: true
 
@@ -47,6 +48,14 @@
     - role: geerlingguy.ntp
     - role: geerlingguy.java
     - role: hammadrauf.sudousers
+    - role: gantsign.visual-studio-code
+      users:
+        - username: "{{ su_vault_vmuser1 }}"
+          visual_studio_code_extensions:
+            - 4ops.terraform
+            - hashicorp.hcl
+            - DavidAnson.vscode-markdownlint
+            - github.vscode-github-actions
     - role: geerlingguy.git
     - role: geerlingguy.docker    
     - role: andrewrothstein.anaconda

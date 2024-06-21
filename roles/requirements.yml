@@ -3,6 +3,7 @@ roles:
   - geerlingguy.ntp
   - geerlingguy.java
   - hammadrauf.sudousers
+  - gantsign.visual-studio-code
   - geerlingguy.docker
   - geerlingguy.git
   - andrewrothstein.anaconda
