@@ -63,3 +63,18 @@
         append: yes
       become: true
 
+    - name: "Copy user Private and Public key to ~/.ssh/ folder for {{ su_vault_vmuser1 }}"
+      ansible.builtin.copy:
+        src: "/home/{{ lookup('env', 'USER') }}/.ssh/id_rsa"
+        dest: "/home/{{ su_vault_vmuser1 }}/.ssh/id_rsa"
+        owner: "{{ su_vault_vmuser1 }}"
+        group: "{{ su_vault_vmuser1 }}"
+        mode: '0600'
+
+    - name: "Copy user Private and Public key to ~/.ssh/ folder for {{ su_vault_vmuser1 }}"
+      ansible.builtin.copy:
+        src: "/home/{{ lookup('env', 'USER') }}/.ssh/id_rsa.pub"
+        dest: "/home/{{ su_vault_vmuser1 }}/.ssh/id_rsa.pub"
+        owner: "{{ su_vault_vmuser1 }}"
+        group: "{{ su_vault_vmuser1 }}"
+        mode: '0644'
