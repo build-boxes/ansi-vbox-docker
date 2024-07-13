@@ -11,11 +11,17 @@ Vagrant.configure("2") do |config|
   #### config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.define "debian" do |debian|
-    debian.vm.box = "raufhammad/debian12"
+    debian.vm.box = "raufhammad/debian12kde"
     debian.vm.network "private_network", ip: "192.168.56.6"
     debian.vm.synced_folder "../shared_folder", "/mnt/shared_folder"
     debian.vm.synced_folder ".", "/vagrant", disabled: true
   end
+
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "2048"
+  #   vb.cpus = "2"
+  # end
 
   # config.vm.define "rockylin8" do |rockylin8|
   #   rockylin8.vm.box = "raufhammad/rockylinux8"
